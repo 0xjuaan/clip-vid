@@ -10,13 +10,14 @@ export default function Home() {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    fetch(`/api/getVideo?link=${vid}`)
+    fetch(`/api/checkVideo?link=${vid}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         if (data.response === "Video not found") {
-          console.log("f" + data.response);
+          alert("Video not found")
         } else {
-          console.log(data.response)
+          router.push(`/video?id=${data.id}`);
         }
       });
   };
