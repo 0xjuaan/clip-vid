@@ -2,37 +2,43 @@ import { Inter } from "next/font/google";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from 'next/image';
-
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Grome() {
-  const router = useRouter();
-  const [videoData, setVideoData] = useState({
-    title: "",
-    duration: "",
-    views: "",
-    channel: "",
-    thumbnail: "",
-  });
-
-  useEffect(() => {
-    const { id } = router.query;
-
-    if (id !== undefined && id !== null && id !== "") {
-        fetch(`/api/getInfo?v=${id}`)
-        .then((res) => res.json())
-        .then((data) => {
-            console.log("f", data);
-            if (data.response === "Video not found") {
-                router.push(`/`)
-            } else {
-                console.log(data)
-                setVideoData(data.response);
-            }
-            });
-
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    const vid = context.query.id as string;
+    console.log(`\n\n${vid}\n\n`)
+    if (vid == "" || vid == undefined || vid == null) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+          query: { error: 'Video not found' },
+        },
+      };
     }
-    }, [router.query]);
+    const res = await fetch(`http://localhost:3000/api/getInfo?v=${vid}`);
+    const data = await res.json();
+  
+    if (data.response === "Video not found") 
+    {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+          query: { error: 'Video not found' },
+        },
+      };
+    } 
+    else 
+    {
+      return { props: { data: data.response } };
+    }
+  };
+  
+export default function VidInfo({data} : {data: any}) { //TODO: Later on, change any to a type for safety
+  const router = useRouter();
+  const [videoData, setVideoData] = useState(data);
   
   return (
     <main>
