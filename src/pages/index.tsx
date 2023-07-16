@@ -14,7 +14,6 @@ export default function Home() {
     }).then((res) => res.json())
   }
 
-
   return (
     <main>
       <div className={`flex justify-between px-8 py-10`}>
