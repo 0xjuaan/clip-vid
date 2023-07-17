@@ -46,34 +46,35 @@ export default function VidInfo({data} : {data: any}) { //TODO: Later on, change
         <h1>[Logo] ClipVid</h1>
         <h1>Dark Mode</h1>
       </div>
-      <div className={`flex-col justify-center`}>
-        <div>
-      <h1 className={`text-center text-3xl font-semibold my-12 w-full`}>
-        Title: {videoData.title}
-        <br></br>
-        Duration: {videoData.duration}
-        <br></br>
-        Views: {videoData.views}
-        <br></br>
-        Channel: {videoData.channel}
-        <br></br>
-        Thumbnail: <Image alt="thumbnail" src={videoData.thumbnail} width={300} height={300}/>
-        <br></br>
-      </h1>
+
+
+      <div className="flex justify-center">
+        <div className={`flex-col items-center justify-center text-center`}>
+
+        <div className="flex justify-center">
+        <Image alt="thumbnail" src={videoData.thumbnail} width={300} height={300}/>
+        </div>
+        <h1>{videoData.channel}- {videoData.title}</h1>
+        <h1>{videoData.duration}</h1>
+        
+        </div>
       </div>
       <div className={`items-center`}>
         {
           (videoData.chapters.length > 0)
-          ? <>
-          <h1 className={`text-center text-3xl font-semibold my-12 w-full`}>Chapters</h1> 
-          <Chapters chapters={videoData.chapters} />
-          </>
+          ? (
+          <div className={'flex items-center justify-center'}>
+            <div>
+            <h1 className={`text-center text-3xl font-semibold mt-12 w-full`}>Chapters</h1> 
+            <Chapters chapters={videoData.chapters} />
+            </div>
+          </div>)
           : <></>
         }
+      </div>
+
         
-      </div>
       
-      </div>
     </main>
   );
 }

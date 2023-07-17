@@ -31,7 +31,7 @@ export default function handler(
         // Extract timestamps (either 00:00:00, 0:00:00, 00:00 or 0:00)
         const lines = description.split("\n")
         const regex = /(\d{0,2}:?\d{1,2}:\d{2})/g
-        const chapters = []
+        const chapters = [{name: "Pick a Chapter:", time: ""}]
       
         for (const line of lines) {
           // Match the regex and check if the line contains a matched regex

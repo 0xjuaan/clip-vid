@@ -20,8 +20,7 @@ export default function Chapters({chapters} : {chapters: chapter[]}) {
 
   return (
     
-    <div className="fixed top-16 w-72">
-        <h1>Chapter</h1>
+    <div className="w-80">
       <Combobox value={selectedChapter} onChange={setSelectedChapter}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
@@ -67,7 +66,7 @@ export default function Chapters({chapters} : {chapters: chapter[]}) {
                             selected ? 'font-medium' : 'font-normal'
                           }`}
                         >
-                          {chapter.name + " " + chapter.time}
+                          {chapter.time + "  " + chapter.name}
                         </span>
                         {selected ? (
                           <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active ? 'text-white' : 'text-teal-600'}`}>
