@@ -17,7 +17,7 @@ export default function Home() {
         if (data.response === "Video not found") {
           alert("Video not found")
         } else {
-          router.push(`/video?id=${data.id}`);
+          router.push(`/video?v=${data.id}`);
         }
       });
   };

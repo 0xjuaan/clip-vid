@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 import Image from 'next/image';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 const inter = Inter({ subsets: ["latin"] });
+import Chapters from "../components/chapters";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-    const vid = context.query.id as string;
-    console.log(`\n\n${vid}\n\n`)
+    const vid = context.query.v as string;
     if (vid == "" || vid == undefined || vid == null) {
       return {
         redirect: {
@@ -39,14 +39,16 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 export default function VidInfo({data} : {data: any}) { //TODO: Later on, change any to a type for safety
   const router = useRouter();
   const [videoData, setVideoData] = useState(data);
-  
+  console.log(videoData.chapters)
   return (
     <main>
       <div className={`flex justify-between px-8 py-10`}>
         <h1>[Logo] ClipVid</h1>
         <h1>Dark Mode</h1>
       </div>
-      <h1 className={`text-center text-9xl font-semibold my-12 w-full`}>
+      <div className={`flex-col justify-center`}>
+        <div>
+      <h1 className={`text-center text-3xl font-semibold my-12 w-full`}>
         Title: {videoData.title}
         <br></br>
         Duration: {videoData.duration}
@@ -55,8 +57,23 @@ export default function VidInfo({data} : {data: any}) { //TODO: Later on, change
         <br></br>
         Channel: {videoData.channel}
         <br></br>
-        Thumbnail: <Image alt="thumbnail" src={videoData.thumbnail} width={500} height={500}/>
+        Thumbnail: <Image alt="thumbnail" src={videoData.thumbnail} width={300} height={300}/>
+        <br></br>
       </h1>
+      </div>
+      <div className={`items-center`}>
+        {
+          (videoData.chapters.length > 0)
+          ? <>
+          <h1 className={`text-center text-3xl font-semibold my-12 w-full`}>Chapters</h1> 
+          <Chapters chapters={videoData.chapters} />
+          </>
+          : <></>
+        }
+        
+      </div>
+      
+      </div>
     </main>
   );
 }

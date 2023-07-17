@@ -25,6 +25,36 @@ export default function handler(
         .replace("M", ":")
         .replace("S", "");
 
+      const description = data.items[0].snippet.description as string;
+
+      const parseChapters = (description :string) => {
+        // Extract timestamps (either 00:00:00, 0:00:00, 00:00 or 0:00)
+        const lines = description.split("\n")
+        const regex = /(\d{0,2}:?\d{1,2}:\d{2})/g
+        const chapters = []
+      
+        for (const line of lines) {
+          // Match the regex and check if the line contains a matched regex
+          const matches = line.match(regex)
+          if (matches) {
+            const ts = matches[0]
+            const title = line
+              .split(" ")
+              .filter((l) => !l.includes(ts))
+              .join(" ")
+              .replace(/^-/, '')
+              .replace(/^ /, '');
+      
+            chapters.push({
+              name: title, time: ts
+            })
+          }
+        }
+      
+        return chapters
+      }
+
+
       
       const usefulData = {
         title: data.items[0].snippet.title,
@@ -32,6 +62,7 @@ export default function handler(
         views: data.items[0].statistics.viewCount,
         channel: data.items[0].snippet.channelTitle,
         duration,
+        chapters: parseChapters(description),
         
       };
 
