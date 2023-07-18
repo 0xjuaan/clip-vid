@@ -11,6 +11,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
+    "@mantine/core": "^6.0.16",
+    "@tabler/icons-react": "^2.26.0",
     "@types/node": "20.4.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.7",
@@ -25,6 +27,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "prettier": "3.0.0"
+    "prettier": "3.0.0",
+    "tailwind-scrollbar": "^3.0.4"
   }
 }
