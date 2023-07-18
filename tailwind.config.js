@@ -7,7 +7,13 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   darkMode: "media",
-  theme: {},
+  theme: {
+    extend: {
+      width: {
+        '324' : '324px',
+      },
+    },
+  },
   plugins: [
     require('tailwind-scrollbar'),
   ],

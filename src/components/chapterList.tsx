@@ -29,14 +29,19 @@ export default function ChapterList({chapters} : {chapters: chapter[]}) {
 
   chapters = chapters.slice(1)
   return (
-    <div ref={containerRef} className="max-h-[300px] overflow-y-scroll scrollbar scrollbar-thumb-teal-100 scrollbar-track-teal-900 ">
-      <Timeline color="teal" active={chapters.length} bulletSize={24} lineWidth={2} className="mx-2">
-        {chapters.map((chapter, index) => (
-          <Timeline.Item key={index} bullet={<IconClock size={12} />} title={chapter.name} className='text-white'>
-            <Text color="dimmed" size="sm">{chapter.time}</Text>
-          </Timeline.Item>
-          ))}
-      </Timeline>
+    <div className='w-324'>
+      <h1 className= 'text-3xl text-center font-semibold mt-12 mb-6 w-full'>Chapters</h1> 
+
+      <div ref={containerRef} className=" max-h-[300px] overflow-y-scroll scrollbar scrollbar-thumb-teal-100 scrollbar-track-teal-900">
+
+        <Timeline color="teal" active={chapters.length} bulletSize={24} lineWidth={2} className="mx-2">
+          {chapters.map((chapter, index) => (
+            <Timeline.Item key={index} bullet={<IconClock size={12} />} title={chapter.name} className='text-white'>
+              <Text color="dimmed" size="sm">{chapter.time}</Text>
+            </Timeline.Item>
+            ))}
+        </Timeline>
+      </div>
     </div>
 
   );

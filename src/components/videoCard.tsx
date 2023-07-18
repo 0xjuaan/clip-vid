@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function VideoCard({videoData} : {videoData: any}) {
     console.log(videoData.thumbnail)
   return (
-    <div className={`flex-col items-center justify-center text-center rounded bg-slate-700 p-3`}>
+    <div className='rounded bg-slate-800 w-324 p-3'>
 
         <div className="flex justify-center relative">
             <Image className="" alt="thumbnail" src={videoData.thumbnail} width={320} height={180}/>
