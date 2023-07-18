@@ -52,19 +52,25 @@ export default function VidInfo({data} : {data: any}) { //TODO: Later on, change
         <h1>Dark Mode</h1>
       </div>
 
-      <div className="mx-5">
-        <VideoCard videoData={videoData} />
+      <div className='flex justify-between'>
+          <div className="mx-5">
 
-        {(videoData.chapters.length > 1)
-          && (
-            <div>
-            <ChapterList chapters={videoData.chapters} />
-            </div>
-          )}
+            <VideoCard videoData={videoData} />
 
+            {(videoData.chapters.length > 1)
+              && (
+                <div>
+                <ChapterList chapters={videoData.chapters} />
+                </div>
+              )}
+
+          </div>
+
+          <div className="mx-5 w-2/5">
+            <Options />
+          </div>
       </div>
 
-      <Options/>
 
         
       
