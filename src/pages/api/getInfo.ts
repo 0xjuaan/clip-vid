@@ -58,7 +58,7 @@ export default function handler(
       
       const usefulData = {
         title: data.items[0].snippet.title,
-        thumbnail: data.items[0].snippet.thumbnails.high.url,
+        thumbnail: data.items[0].snippet.thumbnails.high.url.replace("hqdefault", "maxresdefault"),
         views: data.items[0].statistics.viewCount,
         channel: data.items[0].snippet.channelTitle,
         duration,

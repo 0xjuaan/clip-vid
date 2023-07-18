@@ -6,9 +6,11 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 const inter = Inter({ subsets: ["latin"] });
 import Chapters from "../components/chapters";
 import ChapterList from "@/components/chapterList";
+import VideoCard from "@/components/videoCard";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
     const vid = context.query.v as string;
+    
     if (vid == "" || vid == undefined || vid == null) {
       return {
         redirect: {
@@ -41,6 +43,7 @@ export default function VidInfo({data} : {data: any}) { //TODO: Later on, change
   const router = useRouter();
   const [videoData, setVideoData] = useState(data);
   console.log(videoData.chapters)
+
   return (
     <main>
       <div className={`flex justify-between px-8 py-10`}>
@@ -50,29 +53,18 @@ export default function VidInfo({data} : {data: any}) { //TODO: Later on, change
 
 
       <div className="flex justify-center">
-        <div className={`flex-col items-center justify-center text-center`}>
-
-        <div className="flex justify-center">
-        <Image alt="thumbnail" src={videoData.thumbnail} width={300} height={300}/>
-        </div>
-        <h1>{videoData.channel}- {videoData.title}</h1>
-        <h1>{videoData.duration}</h1>
-        
-        </div>
+        <VideoCard videoData={videoData} />
       </div>
-      <div className={`items-center`}>
-        {
-          (videoData.chapters.length > 0)
-          ? (
+      <div className="">
+        {(videoData.chapters.length > 1)
+          && (
           <div className={'flex items-center justify-center'}>
             <div>
             <h1 className={`text-center text-3xl font-semibold mt-12 mb-6 w-full`}>Chapters</h1> 
             <ChapterList chapters={videoData.chapters} />
             </div>
-          </div>)
-          : <></>
-        }
-        
+          </div>
+          )}
       </div>
 
         
