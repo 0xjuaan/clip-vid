@@ -24,7 +24,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     }
     const res = await fetch(`http://localhost:3000/api/getInfo?v=${vid}`);
     const data = await res.json();
-  
+    console.log("FIRST")
+
     if (data.response === "Video not found") 
     {
       return {
@@ -37,14 +38,24 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     } 
     else 
     {
-      return { props: { videoData: data.response } };
+      
+      return { props: { videoData: data.response, id: vid} };
     }
+
+    
   };
   
-export default function VidInfo({videoData} : {videoData: any}) { //TODO: Later on, change any to a type for safety
+export default function VidInfo({videoData, id} : {videoData: any, id: string}) { //TODO: Later on, change any to a type for safety
   const [timeRange, setTimeRange] = useState([0, videoData.duration]);
   const router = useRouter();
 
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/quality?v=${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data)
+    })
+  }, [id])
   return (
     <main>
       <div className={`flex justify-between px-8 py-10`}>

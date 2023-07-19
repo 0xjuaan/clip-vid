@@ -32,7 +32,7 @@ export default function Options({duration, setRange, range} : {duration: string,
                 labelAlwaysOn
                 label={(value) => (value < 60) ? `00:${value}` : `${moment.duration(value, 'seconds').format('hh:mm:ss')}`}
                 marks={[]}
-                onChangeEnd={(value) => setRange(value)}
+                onChange={(value) => setRange(value)}
             />    
             <h1>Ok so u want to download from {(range[0] < 60) ? `00:${range[0]}` : `${moment.duration(range[0], 'seconds').format('hh:mm:ss')}`} to {(range[1] < 60) ? `00:${range[1]}` : `${moment.duration(range[1], 'seconds').format('hh:mm:ss')}`}</h1>
 
