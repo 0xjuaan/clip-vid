@@ -43,7 +43,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 export default function VidInfo({data} : {data: any}) { //TODO: Later on, change any to a type for safety
   const router = useRouter();
   const [videoData, setVideoData] = useState(data);
-  console.log(videoData.chapters)
 
   return (
     <main>
@@ -67,7 +66,7 @@ export default function VidInfo({data} : {data: any}) { //TODO: Later on, change
           </div>
 
           <div className="mx-5 w-2/5">
-            <Options />
+            <Options duration={videoData.duration} />
           </div>
       </div>
 

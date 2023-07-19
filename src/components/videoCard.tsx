@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 export default function VideoCard({videoData} : {videoData: any}) {
-    console.log(videoData.thumbnail)
   return (
     <div className='rounded bg-slate-800 w-324 p-3'>
 

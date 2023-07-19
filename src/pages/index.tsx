@@ -13,7 +13,6 @@ export default function Home() {
     fetch(`/api/checkVideo?link=${vid}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         if (data.response === "Video not found") {
           alert("Video not found")
         } else {

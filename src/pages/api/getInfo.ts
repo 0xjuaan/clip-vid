@@ -1,4 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+var moment = require("moment");
+var momentDurationFormatSetup = require("moment-duration-format");
 
 type Data = {
   response: string | object;
@@ -19,11 +21,8 @@ export default function handler(
       if (data.pageInfo.totalResults === 0) {
           return res.status(404).json({ response: "Video not found", id: videoId });
       }
-      const duration = data.items[0].contentDetails.duration
-        .replace("PT", "")
-        .replace("H", ":")
-        .replace("M", ":")
-        .replace("S", "");
+      const duration = moment.duration(data.items[0].contentDetails.duration).format("hh:mm:ss")
+      const seconds = moment.duration(data.items[0].contentDetails.duration).asSeconds()
 
       const description = data.items[0].snippet.description as string;
 
@@ -50,7 +49,6 @@ export default function handler(
             })
           }
         }
-      
         return chapters
       }
 
@@ -62,6 +60,7 @@ export default function handler(
         views: data.items[0].statistics.viewCount,
         channel: data.items[0].snippet.channelTitle,
         duration,
+        seconds,
         chapters: parseChapters(description),
         
       };
