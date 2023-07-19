@@ -12,6 +12,7 @@ import Options from "@/components/options";
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
     const vid = context.query.v as string;
     
+    
     if (vid == "" || vid == undefined || vid == null) {
       return {
         redirect: {
@@ -36,13 +37,13 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     } 
     else 
     {
-      return { props: { data: data.response } };
+      return { props: { videoData: data.response } };
     }
   };
   
-export default function VidInfo({data} : {data: any}) { //TODO: Later on, change any to a type for safety
+export default function VidInfo({videoData} : {videoData: any}) { //TODO: Later on, change any to a type for safety
+  const [timeRange, setTimeRange] = useState([0, videoData.duration]);
   const router = useRouter();
-  const [videoData, setVideoData] = useState(data);
 
   return (
     <main>
@@ -66,7 +67,7 @@ export default function VidInfo({data} : {data: any}) { //TODO: Later on, change
           </div>
 
           <div className="mx-5 w-2/5">
-            <Options duration={videoData.duration} />
+            <Options duration={videoData.duration} setRange={setTimeRange} range={timeRange} />
           </div>
       </div>
 
