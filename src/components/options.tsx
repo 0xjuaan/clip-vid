@@ -1,7 +1,8 @@
 import { Tabs, RangeSlider } from '@mantine/core';
-import { IconDownload  } from '@tabler/icons-react';
 import { useState, useEffect, useRef } from 'react';
-import { Radio, Group, Button } from '@mantine/core';
+import { Radio } from '@mantine/core';
+import DownloadButton from './download';  
+
 
 var moment = require("moment");
 var momentDurationFormatSetup = require("moment-duration-format");
@@ -10,12 +11,14 @@ export interface chapter {
     name: string;
     time: string;
 }
-export default function Options({duration, setRange, range, quality} : {duration: string, setRange: Function, range: number[], quality: any}) {
+export default function Options({duration, setRange, range, quality, id} : {duration: string, setRange: Function, range: number[], quality: any, id:string}) {
   const seconds = (moment.duration(duration).asSeconds())/60 as number;
-
-  console.log(quality)
+  const [format, setFormat] = useState('');
   let pValues = new Set(); // Used to track unique p values
   let removals = 0;
+
+  
+
     return (
         <div className="w-full text-teal-600">
         <Tabs className='bg-teal-200' color="teal" defaultValue="first">
@@ -42,6 +45,7 @@ export default function Options({duration, setRange, range, quality} : {duration
             <Radio.Group
               name="quality"
               label="Select Video Quality"
+              onChange={(value) => setFormat(value)}
             >
             {
               quality.filter((q: any) => {
@@ -63,11 +67,9 @@ export default function Options({duration, setRange, range, quality} : {duration
             }
            </Radio.Group>
 
-            <div className="flex justify-center">
-           <Button radius="lg" color="teal" leftIcon={<IconDownload size="1rem" />} className="bg-teal-500 mx-2">
-              Download Video
-            </Button>
-            </div>
+           <DownloadButton id={id} format={format} start={moment.duration(range[0], 'seconds').format('hh:mm:ss')} end={moment.duration(range[1], 'seconds').format('hh:mm:ss')}/>
+
+            
            
 
             </Tabs.Panel>
