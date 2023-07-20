@@ -1,7 +1,7 @@
 import { Tabs, RangeSlider } from '@mantine/core';
-import { IconClock } from '@tabler/icons-react';
+import { IconDownload  } from '@tabler/icons-react';
 import { useState, useEffect, useRef } from 'react';
-import { Radio, Group } from '@mantine/core';
+import { Radio, Group, Button } from '@mantine/core';
 
 var moment = require("moment");
 var momentDurationFormatSetup = require("moment-duration-format");
@@ -55,13 +55,19 @@ export default function Options({duration, setRange, range, quality} : {duration
                 }})
               .map((q: any, index: number) => { //Map the filtered array
                 const p = q.res.split('x')[1];
-                console.log(Number(index) == Number(quality.length-1-removals)) //Returns true
+                const conditional = Number(index) == Number(quality.length-1-removals)
                 return (
-                  <Radio checked={Number(index) == Number(quality.length-1-removals)} className="mt-2" key={index} label={`${p}p`} value={String(q.id)} description={q.res}></Radio>
+                  <Radio checked={conditional} className="mt-2" key={index} label={`${p}p`} value={String(q.id)} description={q.res}></Radio>
                 )
               })
             }
            </Radio.Group>
+
+            <div className="flex justify-center">
+           <Button radius="lg" color="teal" leftIcon={<IconDownload size="1rem" />} className="bg-teal-500 mx-2">
+              Download Video
+            </Button>
+            </div>
            
 
             </Tabs.Panel>
