@@ -48,12 +48,13 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 export default function VidInfo({videoData, id} : {videoData: any, id: string}) { //TODO: Later on, change any to a type for safety
   const [timeRange, setTimeRange] = useState([0, videoData.duration]);
   const router = useRouter();
+  const [quality, setQuality] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/quality?v=${id}`)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data)
+      setQuality(data.response);
     })
   }, [id])
   return (
@@ -71,14 +72,14 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
             {(videoData.chapters.length > 1)
               && (
                 <div>
-                <ChapterList chapters={videoData.chapters} />
+                <ChapterList chapters={videoData.chapters} /> 
                 </div>
               )}
 
           </div>
 
           <div className="mx-5 w-2/5">
-            <Options duration={videoData.duration} setRange={setTimeRange} range={timeRange} />
+            <Options duration={videoData.duration} setRange={setTimeRange} range={timeRange} quality={quality}/>
           </div>
       </div>
 

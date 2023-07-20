@@ -20,7 +20,7 @@ export default function handler(
     })
     .then((response) => response.json())
     .then((data) => {
-        return res.status(200).json({ response: data });
+        return res.status(200).json({ response: data.formats });
     });
     } catch (error) {
         return res.status(400).json({ response: "Some error occured"});
