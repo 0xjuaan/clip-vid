@@ -79,7 +79,7 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
           </div>
 
           <div className="mx-5 w-2/5">
-            <Options duration={videoData.duration} setRange={setTimeRange} range={timeRange} quality={quality} id={videoData.id}/>
+            <Options duration={videoData.duration} setRange={setTimeRange} range={timeRange} quality={quality} id={id}/>
           </div>
       </div>
 

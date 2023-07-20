@@ -8,16 +8,19 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
     const [downLink, setDownLink] = useState<any>(null)
 
     const handleDownload = () => {
+        
+        const body = JSON.stringify({
+            id: id,
+            format: format,
+            start: start,
+            end: end,
+          })
+
         setDownLink('pending')
         fetch('http://localhost:3000/api/download', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            id: "BRlr37jUMFs", // Get prop
-            format: "133", // Get prop
-            start: "00:1:04", // Get formatted prop
-            end: "00:2:04", // Get formatted prop
-          })
+          body: body
         },)
         .then((res) => res.json())
         .then((data) => {
