@@ -15,6 +15,7 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
             start: start,
             end: end,
           })
+          console.log(body)
 
         setDownLink('pending')
         fetch('http://localhost:3000/api/download', {
@@ -24,7 +25,6 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
         },)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data)   
             setDownLink(data.url)
         });
       }
@@ -33,6 +33,7 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
         if (downLink !== 'pending') {
             const link = document.getElementById('invis') as HTMLAnchorElement;
             link.click();
+            console.log("GOT IT G")
         }
         }, [downLink])
             

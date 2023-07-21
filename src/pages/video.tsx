@@ -9,6 +9,9 @@ import ChapterList from "@/components/chapterList";
 import VideoCard from "@/components/videoCard";
 import Options from "@/components/options";
 
+var moment = require("moment");
+var momentDurationFormatSetup = require("moment-duration-format");
+
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
     const vid = context.query.v as string;
     
@@ -24,7 +27,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     }
     const res = await fetch(`http://localhost:3000/api/getInfo?v=${vid}`);
     const data = await res.json();
-    console.log("FIRST")
 
     if (data.response === "Video not found") 
     {
@@ -46,7 +48,18 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   };
   
 export default function VidInfo({videoData, id} : {videoData: any, id: string}) { //TODO: Later on, change any to a type for safety
-  const [timeRange, setTimeRange] = useState([0, videoData.duration]);
+
+
+  let duration = 600 as number;
+  if (/^(\d{2}):(\d{2})$/.test(videoData.duration)) {
+    duration = moment.duration(`00:${videoData.duration}`).asSeconds();
+    console.log("LETS GIVE IT A " + duration)
+  }
+  else if (/^(\d{2}):(\d{2}):(\d{2})$/.test(videoData.duration)) {
+    duration = moment.duration(videoData.duration).asSeconds();
+  }
+  console.log('real' + duration)
+  const [timeRange, setTimeRange] = useState([0, duration ]);
   const router = useRouter();
   const [quality, setQuality] = useState([]);
 
@@ -79,7 +92,7 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
           </div>
 
           <div className="mx-5 w-2/5">
-            <Options duration={videoData.duration} setRange={setTimeRange} range={timeRange} quality={quality} id={id}/>
+            <Options duration={duration} setRange={setTimeRange} range={timeRange} quality={quality} id={id} chapters={videoData.chapters}/>
           </div>
       </div>
 
