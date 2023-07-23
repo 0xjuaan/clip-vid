@@ -58,7 +58,11 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
   else if (/^(\d{2}):(\d{2}):(\d{2})$/.test(videoData.duration)) {
     duration = moment.duration(videoData.duration).asSeconds();
   }
+  else {
+    duration = videoData.duration;
+  }
   console.log('real' + duration)
+  console.log(videoData.duration)
   const [timeRange, setTimeRange] = useState([0, duration ]);
   const router = useRouter();
   const [quality, setQuality] = useState([]);
