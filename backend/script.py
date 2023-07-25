@@ -6,11 +6,11 @@ def download_video(id, format, start, end):
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, "video.mp4")
 
-    #Setting command 
+    #Setting command (downloads required format + best audio, using timestamps if start+end provided)
     if start == "None" or end == "None":
-        command = ["yt-dlp", "-f", format, f"youtube.com/watch?v={id}", "-o", output_file]
+        command = ["yt-dlp", "-f", f"{format}+bestaudio[ext=m4a]", f"youtube.com/watch?v={id}", "-o", output_file]
     else:
-        command = ["yt-dlp", "-f", format, "--download-sections", f"*{start}-{end}", f"youtube.com/watch?v={id}", "-o", output_file]
+        command = ["yt-dlp", "-f", f"{format}+bestaudio[ext=m4a]", "--download-sections", f"*{start}-{end}", f"youtube.com/watch?v={id}", "-o", output_file]
     subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
     return output_file
 
