@@ -11,7 +11,7 @@ export default function handler(
     const videoId = req.query.v as string;
 
     try {
-        fetch('http://localhost:5000/listFormat', {
+        fetch('https://clip-container-5e6b1edf9e5e.herokuapp.com/listFormat', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
