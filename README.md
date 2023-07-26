@@ -12,3 +12,17 @@ The first youtube to mp4 service that lets you download snippets of youtube vide
 - Celery, Redis (For Async Worker Process)  
 - yt-dlp (Python package to download youtube vids)  
 - Docker (To containerise web and worker processes)
+
+
+## Average Times
+
+10 second video (834.60KiB) 6.6 seconds
+1 minute video (21.60MiB) 16.2 seconds
+6:34 minute video (forgot to count, long time)
+10 minute video ()
+
+
+## Commands to push backend
+
+heroku container:push --recursive -a clip-container
+heroku container:release web worker -a clip-container
