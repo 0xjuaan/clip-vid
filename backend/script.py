@@ -1,12 +1,12 @@
 import subprocess
 import os
 
-outputFormat = "mp4"
 
 def download_video(id, format, start, end):
     output_dir = "/app/output"
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, "video.mp4")
+    outputFormat = "mp4"
 
     #Setting command (downloads required format + best audio, using timestamps if start+end provided)
     if start == "None" or end == "None":
