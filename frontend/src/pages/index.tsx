@@ -28,10 +28,12 @@ export default function Home() {
 				<h1 className="items-center ml-2 text-teal-500 text-5xl font-semibold ">ClipVid</h1>
 			</div>
 
-			<div>
-				<button className=" text-black bg-teal-500 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
+			<div className="flex justify-between items-center">
+				<button className=" text-black bg-teal-500 h-12 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
 					Give Feedback
 				</button>
+				<Image className="text-white" src='/twitter.svg' alt='logo' width={80} height={80}></Image>
+
 			</div>
     		
       	</div>
@@ -53,7 +55,7 @@ export default function Home() {
 				<button
 					onClick={(e) => handleSubmit(e)}
 					className="font-semibold mx-5 rounded-lg bg-back w-20">
-					Clipee
+					Clip <span>-&gt;</span>
 				</button>
 			</div>
       </div>
