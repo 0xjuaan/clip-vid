@@ -1,6 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-var moment = require("moment");
-var momentDurationFormatSetup = require("moment-duration-format");
 
 type Data = any
 
@@ -14,7 +12,12 @@ async function pollStatus(statusUrl :string) {
       
       response = await fetch(statusUrl);
       data = await response.json();
+
       console.log(data.state)
+      if (data.state === 'FAILED') {
+        return null;
+      }
+
     } while(data.state !== 'SUCCESS' && response.ok);
   
     if(response.ok) {
@@ -33,7 +36,6 @@ export default async function handler(
 ) {
     // Send the request to download the vid
     const body = req.body;
-    console.log('sending ' + JSON.stringify(body))
     
     const response = await fetch('https://clip-container-5e6b1edf9e5e.herokuapp.com/download', {
             method: 'POST',
@@ -43,9 +45,12 @@ export default async function handler(
         const data = await response.json();
 
         const statusURL = "https://clip-container-5e6b1edf9e5e.herokuapp.com" + data.Location
-        console.log('now going to: ' + statusURL)
         const url = await pollStatus(statusURL);
-        console.log('got url: ' + url)
+
+        if (!url || url === null || url === undefined) {
+            return res.status(500).json({ error: 'Failed to download file' });
+        }
+
         return res.status(200).json({ url: url });
 }  
 

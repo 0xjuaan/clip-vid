@@ -13,7 +13,10 @@ export default function handler(
   let videoId: string;
   if (link.includes("youtu.be")) {
     videoId = link.split(".be/")[1].split("&")[0] as string;
-  } 
+  }
+  else if (link.length == 11) {
+    videoId = link as string;
+  }
   else {
     videoId = link.split("v=")[1].split("&")[0] as string;
   }

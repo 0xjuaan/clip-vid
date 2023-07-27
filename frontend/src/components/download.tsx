@@ -22,18 +22,17 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: body
-        },)
-        .then((res) => res.json())
-        .then((data) => {
-            setDownLink(data.url)
-        });
+        })
+        .then((res) => {
+          if (!res.ok) setDownLink('failed')
+          else return res.json()
+        })
       }
 
       useEffect(() => {
         if (downLink !== 'pending') {
             const link = document.getElementById('invis') as HTMLAnchorElement;
             link.click();
-            console.log("GOT IT G")
         }
         }, [downLink])
             
