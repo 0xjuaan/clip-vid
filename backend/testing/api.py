@@ -33,6 +33,6 @@ req2 = requests.get(newting, timeout=500)
 print(req2.json())
 
 while (req2.json()['state'] != "SUCCESS"):  
-    time.sleep(2)
+    time.sleep(1)
     req2 = requests.get(newting, timeout=500)
     print(req2.json())
