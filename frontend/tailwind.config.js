@@ -9,6 +9,9 @@ module.exports = {
   darkMode: "media",
   theme: {
     extend: {
+      colors: {
+        'back': '#0D2430',
+      },
       width: {
         '324' : '324px',
       },

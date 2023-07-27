@@ -1,8 +1,6 @@
-import { Inter } from "next/font/google";
 import { useState } from "react";
 import {useRouter} from "next/router";
-
-const inter = Inter({ subsets: ["latin"] });
+import  Image  from "next/image";
 
 export default function Home() {
   const router = useRouter();
@@ -16,39 +14,48 @@ export default function Home() {
         if (data.response === "Video not found") {
           alert("Video not found")
         } else {
-          router.push(`/video?v=${data.id}`);
+          router.push(`/watch?v=${data.id}`);
         }
       });
   };
 
   return (
     <main>
-      <div className={`flex justify-between px-8 py-10`}>
-        <h1>[Logo] ClipVid</h1>
-        <h1>Dark Mode</h1>
-      </div>
-      <div className="flex-col w-3/5 mx-auto">
-        <h1 className={`text-center text-9xl font-semibold my-12 w-full`}>
-          Enter your video link
-        </h1>
-        <div className="flex justify-center">
-          <input
-            onChange={(e) => setVid(e.target.value)}
-            className=" text-gray-900 bg-green-400 focus:border-black text-sm rounded-lg  block w-full max-w-5xl h-12"
-            type="text"
-          ></input>
-          <button
-            onClick={(e) => handleSubmit(e)}
-            className=" mx-5 rounded-lg bg-green-700"
-          >
-            CLICK ME!
-          </button>
-        </div>
-      </div>
-      <div className="flex-col w-3/5 my-12 mx-auto ">
-        <h1 className={`text-center text-5xl font-semibold my-12 w-full`}>
-          Steps to download your video
-        </h1>
+		{/* Header */}
+		<div className="flex justify-between px-8 py-10 bg-back max-h-8 items-center"> 
+			<div className="flex justify-between  items-center">
+				<Image src='/clipvid_logo.png' alt='logo' width={80} height={80}></Image>
+				<h1 className="items-center ml-2 text-teal-500 text-5xl font-semibold ">ClipVid</h1>
+			</div>
+
+			<div>
+				<button className=" text-black bg-teal-500 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
+					Give Feedback
+				</button>
+			</div>
+    		
+      	</div>
+
+      	<div className="flex-col w-3/5 mx-auto">
+			<h1 className="text-center text-7xl font-semibold my-12 w-full">
+			Enter your video link
+			</h1>
+
+			<div className="flex justify-center">
+
+				<input
+				onChange={(e) => setVid(e.target.value)}
+				className=" text-gray-900 placeholder:text-gray-900 placeholder:opacity-40 bg-teal-500 hover:outline-teal-200 focus:outline-teal-200 text-sm outline-none font-semibold rounded-lg  block w-full max-w-5xl h-12 px-2 transition duration-150 ease-in-out"
+				type="text"
+				placeholder="e.g youtube.com/watch?v=dQw4w9WgXcQ ;)">
+				</input>
+
+				<button
+					onClick={(e) => handleSubmit(e)}
+					className="font-semibold mx-5 rounded-lg bg-back w-20">
+					Clipee
+				</button>
+			</div>
       </div>
     </main>
   );
