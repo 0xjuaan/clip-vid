@@ -33,7 +33,7 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
       }
 
       useEffect(() => {
-        if (downLink !== 'pending') {
+        if (downLink !== 'pending' && downLink !== 'failed') {
             const link = document.getElementById('invis') as HTMLAnchorElement;
             link.click();
         }
@@ -45,7 +45,7 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
            <Button loading={downLink == 'pending'} onClick={() => handleDownload()} radius="lg" color="teal" leftIcon={<IconDownload size="1rem" />} className="bg-teal-500 mx-2">
               Download Video
             </Button>
-
+            f
             <a id="invis" href={downLink}></a>
         </div>
     )
