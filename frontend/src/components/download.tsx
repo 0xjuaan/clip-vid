@@ -27,6 +27,9 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
           if (!res.ok) setDownLink('failed')
           else return res.json()
         })
+        .then((data) => {
+          setDownLink(data.url)
+        })
       }
 
       useEffect(() => {
