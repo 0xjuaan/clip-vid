@@ -54,10 +54,15 @@ export default function Home() {
 
 				<button
 					onClick={(e) => handleSubmit(e)}
-					className="font-semibold mx-5 rounded-lg bg-back w-20">
-					Clip <span>-&gt;</span>
+					className="group font-semibold mx-5 rounded-lg bg-back w-20">
+					Clip 
+					<span className="ml-1 inline-block transition-transform group-hover:translate-x-0.5">
+						-&gt; 
+					</span>
 				</button>
+				
 			</div>
+			
       </div>
     </main>
   );
