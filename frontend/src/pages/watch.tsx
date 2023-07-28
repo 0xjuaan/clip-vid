@@ -76,10 +76,20 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
   }, [id])
   return (
     <main>
-      <div className={`flex justify-between px-8 py-10`}>
-        <h1>[Logo] ClipVid</h1>
-        <h1>Dark Mode</h1>
-      </div>
+      <div className="flex justify-between px-8 py-10 mb-10 bg-back max-h-8 items-center"> 
+			<div className="flex justify-between  items-center">
+				<Image src='/clipvid_logo.png' alt='logo' width={80} height={80}></Image>
+				<h1 className="items-center ml-2 text-teal-500 text-5xl font-semibold ">ClipVid</h1>
+			</div>
+
+			<div className="flex justify-between items-center">
+				<button className=" text-black bg-teal-500 h-12 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
+					Give Feedback
+				</button>
+
+			</div>
+    		
+      	</div>
 
       <div className='flex justify-between'>
           <div className="mx-5">

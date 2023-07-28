@@ -32,7 +32,6 @@ export default function Home() {
 				<button className=" text-black bg-teal-500 h-12 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
 					Give Feedback
 				</button>
-				<Image className="text-white" src='/twitter.svg' alt='logo' width={80} height={80}></Image>
 
 			</div>
     		
