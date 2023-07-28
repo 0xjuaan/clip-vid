@@ -11,6 +11,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
 ) {
+  try {
   const videoId = req.query.v as string; 
   fetch(
     `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${process.env.YOUTUBE_API_KEY}`,
@@ -67,4 +68,7 @@ export default function handler(
 
       return res.status(200).json({ response: usefulData, id: videoId });
     });
+  } catch (error) {
+    return res.status(500).json({ response: "Internal Server Error", id: 'error' });
+  }
 }

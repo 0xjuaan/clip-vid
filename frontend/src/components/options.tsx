@@ -22,6 +22,7 @@ function formatTime(seconds: number) {
 }
 export default function Options({duration, setRange, range, quality, id, chapters} : {duration: number, setRange: Function, range: number[], quality: any, id:string, chapters: chapter[]}) {
   // Get duration in seconds
+  console.log(duration)
   const seconds = duration;
   const [format, setFormat] = useState('');
 

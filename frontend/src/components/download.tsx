@@ -39,6 +39,9 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
     const [statusMessage, setStatusMessage] = useState<string>('Fetching Video Information')
     const handleDownload = () => {
         
+      if (format == '') {
+        format = 'bestvideo'
+      }
         const body = JSON.stringify({
             id: id,
             format: format,

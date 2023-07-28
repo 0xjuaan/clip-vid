@@ -9,8 +9,13 @@ export default function Home() {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     fetch(`/api/checkVideo?link=${vid}`)
-      .then((res) => res.json())
+      .then((res) => {
+		if (res.ok) return res.json()
+		else alert("Invalid link")
+		return null
+	})
       .then((data) => {
+		if (data === null) return
         if (data.response === "Video not found") {
           alert("Video not found")
         } else {
