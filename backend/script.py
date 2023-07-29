@@ -14,6 +14,11 @@ def download_video(id, format, start, end):
     else:
         command = ["yt-dlp", "-f", f"{format}+bestaudio[ext=m4a]", "--merge-output-format", outputFormat, "--download-sections", f"*{start}-{end}", "--force-keyframes-at-cuts", id, "-o", output_file]
     
+    a = ""
+    for i in command:
+        a += i + " "
+    print("THE COMMAND IS BELOW \n")
+    print(a)
     subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
     return output_file
 
