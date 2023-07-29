@@ -14,9 +14,7 @@ def download_video(id, format, start, end):
     else:
         command = ["yt-dlp", "-f", f"{format}+bestaudio[ext=m4a]", "--merge-output-format", outputFormat, "--download-sections", f"*{start}-{end}", "--force-keyframes-at-cuts", id, "-o", output_file]
     
-    print(f"\n\nDownloading video with command: {command}\n\n")
     subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
-    print(f"\n\nDownloaded video\n\n")
     return output_file
 
 def list_formats(id):
@@ -24,9 +22,6 @@ def list_formats(id):
     output = subprocess.run(basic, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
 
     return output.stdout.decode("utf-8")
-
-# video_url = "https://www.youtube.com/watch?v=0twUQ0znVks"
-# out = download(url=video_url, start="00:00:04", end="00:00:06")
 
     
 

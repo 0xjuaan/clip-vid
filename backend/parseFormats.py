@@ -8,7 +8,7 @@ filesize_pattern = r"(\d+\.\d+)(MiB|KiB|GiB)"
 def parse(data):
     # Split content into lines and filter out lines containing 'mp4'
     lines = data.split('\n')
-    mp4_lines = [line for line in lines if 'mp4' in line]
+    mp4_lines = [line for line in lines if 'mp4' in line and 'dash' in line]
 
     # Define list to hold parsed data
     parsed_data = []
@@ -38,7 +38,8 @@ def parse(data):
                 if size < old[res_match.group()]["filesize"]:
                     # Remove old data
                     parsed_data = [data for data in parsed_data if data['res'] != res_match.group()]
-                    # Append new data
+
+                    # Append new data to the final list
                     parsed_data.append({
                         "id": int(id_match.group()),
                         "res": res_match.group(),
