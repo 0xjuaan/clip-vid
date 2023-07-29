@@ -101,10 +101,12 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
               )}
 
           </div>
-
+          { (quality.length != 0 && quality) ? (
           <div className="mx-5 w-2/5">
             <Options duration={duration} setRange={setTimeRange} range={timeRange} quality={quality} id={id} chapters={videoData.chapters}/>
-          </div>
+          </div>)
+          : (<div></div>)
+          }
       </div>
 
 

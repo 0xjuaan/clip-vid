@@ -22,9 +22,9 @@ function formatTime(seconds: number) {
 }
 export default function Options({duration, setRange, range, quality, id, chapters} : {duration: number, setRange: Function, range: number[], quality: any, id:string, chapters: chapter[]}) {
   // Get duration in seconds
-  console.log(duration)
   const seconds = duration;
-  const [format, setFormat] = useState(quality[quality.length-1].id);
+  
+  const [format, setFormat] = useState(quality[quality.length-1]);
 
   // Get unique values of 'p' from quality array
   let pValues = new Set(); 
