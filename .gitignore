@@ -1,4 +1,4 @@
 *.mp4
 *.m4a
 
-testing/
+backend/testing/*

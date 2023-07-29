@@ -24,7 +24,7 @@ export default function Options({duration, setRange, range, quality, id, chapter
   // Get duration in seconds
   console.log(duration)
   const seconds = duration;
-  const [format, setFormat] = useState('');
+  const [format, setFormat] = useState(quality[quality.length-1].id);
 
   // Get unique values of 'p' from quality array
   let pValues = new Set(); 

@@ -2,7 +2,7 @@ import requests
 import json
 import time
 
-video = "https://www.youtube.com/watch?v=4ASKMcdCc3g&t=11s"
+video = "https://www.youtube.com/watch?v=yRoOd7in0n8&t=11s"
 
 id = video.split("v=")[1].split("&")[0]
 
@@ -16,10 +16,15 @@ headers = {
     "Content-Type": "application/json"
 }
 
-data2 = {"id":id,"format":"609","start":"00:00","end":"None"}
+data2 = {"id":id,"format":"617","start":"00:00","end":"00:11"}
+data3 = {
+    "id": 'Dwg9Jw_0i18',
+}
+#response = requests.post(url, data=json.dumps(data2), headers=headers, timeout=500)
+gettage = requests.post(list, data=json.dumps(data3), headers=headers, timeout=500)
+print(gettage.json())
 
-response = requests.post(url, data=json.dumps(data2), headers=headers, timeout=500)
-
+"""
 if response.status_code == 200 or response.status_code == 202:
     print(response.json())
 else:
@@ -36,3 +41,6 @@ while (req2.json()['state'] != "SUCCESS"):
     time.sleep(1)
     req2 = requests.get(newting, timeout=500)
     print(req2.json())
+
+
+#135 mp4   854x480     25    │   20.65MiB  270k https │ avc1.4D401E    270k video only          480p, mp4_dash"""
