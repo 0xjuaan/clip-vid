@@ -78,6 +78,7 @@ def listFormat():
 
     # Parse output to get list of formats
     parsed_data = pf.parse(output)
+    print("WE DID THIS G")
 
     return jsonify({'formats': parsed_data})
 

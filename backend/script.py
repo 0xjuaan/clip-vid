@@ -22,8 +22,8 @@ def list_formats(id):
     output = subprocess.run(basic, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
     return output.stdout.decode("utf-8")
 
-out = download_video(id='Dwg9Jw_0i18', start="00:00:44", end="00:00:55", format='137')
-print(out) 
+# out = download_video(id='Dwg9Jw_0i18', start="00:00:44", end="00:00:55", format='137')
+# print(out) 
 
 
 

@@ -32,7 +32,7 @@ def download_video(format):
     else:
         print(response.json()['Error'],": Code is", response.status_code)
 
-    newting = "http://174.138.23.36:80" + response.json()['Location']
+    newting = "http://157.230.195.21:80" + response.json()['Location']
     print(newting)
     time.sleep(0.1)
 
