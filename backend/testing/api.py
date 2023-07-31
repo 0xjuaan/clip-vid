@@ -5,8 +5,8 @@ import time
 video = "https://www.youtube.com/watch?v=be9RJp4f4Pc&t=11s"
 id = video.split("v=")[1].split("&")[0]
 
-download = "https://clip-container-5e6b1edf9e5e.herokuapp.com/download"
-list = "https://clip-container-5e6b1edf9e5e.herokuapp.com/listFormat"
+download = "http://157.230.195.21:80/download"
+list = "http://157.230.195.21:80/listFormat"
 
 headers = {
     "Content-Type": "application/json"
@@ -20,7 +20,8 @@ def status():
     print(gettage.json())
     return gettage.json()
 
-data2 = {"id":id,"format":"137","start":"00:04","end":"00:24"}
+data2 = {"id":'snYu2JUqSWs',"format":"137","start":"None","end":"00:24"}
+
 def download_video(format):
     data2['format'] = format
     print("sending a request with data:", data2)
@@ -31,7 +32,7 @@ def download_video(format):
     else:
         print(response.json()['Error'],": Code is", response.status_code)
 
-    newting = "https://clip-container-5e6b1edf9e5e.herokuapp.com" + response.json()['Location']
+    newting = "http://174.138.23.36:80" + response.json()['Location']
     print(newting)
     time.sleep(0.1)
 
@@ -44,4 +45,5 @@ def download_video(format):
         print(req2.json())
 
 status()
-#download_video("137")
+format = input("Enter format: ")
+download_video(format)

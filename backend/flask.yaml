@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask
+        image: juandocker1/clip-cluster:flask
+        ports:
+        - containerPort: 80        
+        env:
+          - name: REDIS_URL
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: REDIS_URL
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: AWS_SECRET_ACCESS_KEY
+      imagePullSecrets:
+      - name: regcred

@@ -1,2 +1,5 @@
 testing/
 *.mp4
+kubectl.exe
+app/
+*.yaml

@@ -10,7 +10,7 @@ def download_video(id, format, start, end):
     if start == "None" or end == "None":
         command = ["yt-dlp", "-f", f"{format}+bestaudio[ext=m4a]", f"youtube.com/watch?v={id}", "-o", output_file]
     else:
-        command = ["yt-dlp", "-f", f"{format}+bestaudio[ext=m4a]", "--download-sections", f"*{start}-{end}", f"youtube.com/watch?v={id}", "-o", output_file]
+        command = ["yt-dlp", "-f", f"{format}+bestaudio[ext=m4a]", "--merge-output-format", "mp4", "--download-sections", f"*{start}-{end}", f"youtube.com/watch?v={id}", "-o", output_file]
         print(" ".join(command))
 
     subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
@@ -29,3 +29,4 @@ print(out)
 
 
 
+#yt-dlp -f 137+bestaudio[ext=m4a] --merge-output-format mp4 --download-sections *00:00:44-00:00:55 Dwg9Jw_0i18
