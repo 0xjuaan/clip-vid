@@ -15,6 +15,7 @@ spec:
       containers:
       - name: celery
         image: juandocker1/clip-cluster:celery
+        imagePullPolicy: Always
         env:
           - name: REDIS_URL
             valueFrom:

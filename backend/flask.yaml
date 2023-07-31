@@ -15,6 +15,7 @@ spec:
       containers:
       - name: flask
         image: juandocker1/clip-cluster:flask
+        imagePullPolicy: Always
         ports:
         - containerPort: 80        
         env:

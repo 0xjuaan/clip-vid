@@ -20,7 +20,7 @@ def status():
     print(gettage.json())
     return gettage.json()
 
-data2 = {"id":'snYu2JUqSWs',"format":"137","start":"None","end":"00:24"}
+data2 = {"id":'f7Lfukf0IKY',"format":"137","start":"00:11","end":"00:31"}
 
 def download_video(format):
     data2['format'] = format
@@ -47,3 +47,8 @@ def download_video(format):
 status()
 format = input("Enter format: ")
 download_video(format)
+
+#$ kubectl get pods
+##NAME                                 READY   STATUS    RESTARTS   AGE
+#celery-deployment-76bbc8c667-x7zl6   1/1     Running   0          56s
+#flask-deployment-6677987dbc-5vhpp    1/1     Running   0          65s

@@ -83,7 +83,13 @@ def listFormat():
 
 @app.route('/status/<task_id>')
 def taskstatus(task_id):
-    task = process.AsyncResult(task_id)
+    print(task_id)
+    try:
+        task = process.AsyncResult(task_id)
+        print(task)
+    except Exception as e:
+        print(f"Error getting task status: {e}")
+        return jsonify({'Error': e}), 500
     if task.state == 'PENDING':
         response = {
             'state': task.state,
