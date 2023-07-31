@@ -3,3 +3,4 @@
 
 backend/testing/*
 backend/kubectl.exe
+backend/testing/api.py
