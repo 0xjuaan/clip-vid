@@ -39,10 +39,6 @@ export default function Options({duration, setRange, range, quality, id, chapter
           </Tabs.List>
 
           <Tabs.Panel value="first" pb="xs">
-            Select Snippet {/*Make this a header*/}
-
-            <Slider duration={seconds} setRange={setRange} />
-            
             <Radio.Group
               name="quality"
               label="Select Video Quality"
