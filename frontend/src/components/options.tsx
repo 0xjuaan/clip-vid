@@ -2,7 +2,7 @@ import { Tabs, RangeSlider, Select } from '@mantine/core';
 import { useState, useEffect, useRef } from 'react';
 import { Radio } from '@mantine/core';
 import DownloadButton from './download';  
-
+import Slider from './slider';
 
 var moment = require("moment");
 var momentDurationFormatSetup = require("moment-duration-format");
@@ -42,17 +42,8 @@ export default function Options({duration, setRange, range, quality, id, chapter
 
           <Tabs.Panel value="first" pb="xs">
             Select Snippet {/*Make this a header*/}
-            <RangeSlider
-                min={0}
-                max={seconds}
-                minRange={5}
-                color="teal"
-                size="lg"
-                labelAlwaysOn
-                label={(value) => formatTime(value)}
-                marks={[]}
-                onChange={(value) => setRange(value)}
-            />  
+            
+            <Slider duration={seconds} setRange={setRange} />
             
             <Radio.Group
               name="quality"
