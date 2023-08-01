@@ -28,8 +28,8 @@ export default function VideoCard({videoData} : {videoData: any}) {
 
         </div>
         <div className="text-black">
-            <h1 className="text-left ">{videoData.title}</h1>
-            <h1 className="text-left text-xs">{videoData.channel}</h1>
+            <h1 className="text-left font-bold ">{videoData.title}</h1>
+            <h1 className="text-left text-xs font-semibold">{videoData.channel}</h1>
         </div>
     </div>
   );
