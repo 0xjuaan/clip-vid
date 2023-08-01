@@ -20,12 +20,10 @@ function formatTime(seconds: number) {
         return moment.duration(seconds, 'seconds').format('hh:mm:ss')
     }
 }
-export default function Options({duration, setRange, range, quality, id, chapters} : {duration: number, setRange: Function, range: number[], quality: any, id:string, chapters: chapter[]}) {
+export default function Options({duration, setRange, range, quality, id, chapters, setFormat} : {duration: number, setRange: Function, range: number[], quality: any, id:string, chapters: chapter[], setFormat: Function}) {
   // Get duration in seconds
   const seconds = duration;
   
-  const [format, setFormat] = useState(quality[quality.length-1]);
-
   // Get unique values of 'p' from quality array
   let pValues = new Set(); 
   let removals = 0;  
@@ -42,13 +40,13 @@ export default function Options({duration, setRange, range, quality, id, chapter
 
           <Tabs.Panel value="first" pb="xs">
             Select Snippet {/*Make this a header*/}
-            
+
             <Slider duration={seconds} setRange={setRange} />
             
             <Radio.Group
               name="quality"
               label="Select Video Quality"
-              onChange={(value) => setFormat(value)}
+              onChange={(value) => {setFormat(value); console.log("WE HAVE" + value)}}
             >
             {
               quality.filter((q: any) => {
@@ -69,8 +67,6 @@ export default function Options({duration, setRange, range, quality, id, chapter
               })
             }
            </Radio.Group>
-
-           <DownloadButton id={id} format={format} start={formatTime(range[0])} end={formatTime(range[1])}/>
 
             
            
@@ -98,7 +94,6 @@ export default function Options({duration, setRange, range, quality, id, chapter
                 })
             }
             />
-           <DownloadButton id={id} format={format} start={formatTime(range[0])} end={formatTime(range[1])}/>
             </Tabs.Panel>
             )}
 

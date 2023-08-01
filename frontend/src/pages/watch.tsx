@@ -8,10 +8,11 @@ import Chapters from "../components/chapters";
 import ChapterList from "@/components/chapterList";
 import VideoCard from "@/components/videoCard";
 import Options from "@/components/options";
-
+import Slider from '@/components/slider';
+import DownloadButton from "@/components/download";
 var moment = require("moment");
 var momentDurationFormatSetup = require("moment-duration-format");
-
+import {formatTime} from "@/utils/formatTime";
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
     const vid = context.query.v as string;
     
@@ -63,12 +64,15 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
   const [timeRange, setTimeRange] = useState([0, duration ]);
   const router = useRouter();
   const [quality, setQuality] = useState([]);
+  const [format, setFormat] = useState(quality[quality.length-1]);
+
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/quality?v=${id}`)
     .then((res) => res.json())
     .then((data) => {
       setQuality(data.response);
+      setFormat(data.response[data.response.length-1]);
     })
   }, [id])
   return (
@@ -92,6 +96,8 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
           <div className="mx-5">
 
             <VideoCard videoData={videoData} />
+            <Slider duration={duration} setRange={setTimeRange}/>
+            <DownloadButton id={id} format={format} start={formatTime(timeRange[0])} end={formatTime(timeRange[1])}/>
 
             {(videoData.chapters.length > 1)
               && (
@@ -103,7 +109,7 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
           </div>
           { (quality.length != 0 && quality) ? (
           <div className="mx-5 w-2/5">
-            <Options duration={duration} setRange={setTimeRange} range={timeRange} quality={quality} id={id} chapters={videoData.chapters}/>
+            <Options duration={duration} setRange={setTimeRange} setFormat={setFormat} range={timeRange} quality={quality} id={id} chapters={videoData.chapters}/>
           </div>)
           : (<div></div>)
           }
