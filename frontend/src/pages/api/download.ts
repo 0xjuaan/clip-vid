@@ -36,15 +36,15 @@ export default async function handler(
 ) {
     // Send the request to download the vid
     const body = req.body;
-    
-    const response = await fetch('https://clip-container-5e6b1edf9e5e.herokuapp.com/download', {
+    const ip = 'http://157.230.195.21:80/'
+    const response = await fetch(ip + 'download', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(body)
         });
         const data = await response.json();
 
-        const statusURL = "https://clip-container-5e6b1edf9e5e.herokuapp.com" + data.Location
+        const statusURL = ip + data.Location
         const url = await pollStatus(statusURL);
 
         if (!url || url === null || url === undefined) {
