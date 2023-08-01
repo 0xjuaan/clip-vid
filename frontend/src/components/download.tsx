@@ -75,7 +75,7 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
 
     return (
         <div className="flex justify-center">
-           <Button loading={downLink == 'pending'} onClick={() => handleDownload()} radius="lg" color="teal" leftIcon={<IconDownload size="1rem" />} className="bg-teal-500 mx-2">
+           <Button  size="xl" loading={downLink == 'pending'} onClick={() => handleDownload()} radius="lg" color="teal" leftIcon={<IconDownload size="1rem" />} className="bg-teal-500 mx-2">
               Download Video
             </Button>
             <Status status={downLink} setval={setStatusMessage} statusMessage={statusMessage}/>
