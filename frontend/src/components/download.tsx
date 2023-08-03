@@ -37,11 +37,15 @@ function Status({status, statusMessage, setval} : {status: string, statusMessage
 export default function DownloadButton({id, format, start, end} : {id: string, format: string, start: string, end: string}) {
     const [downLink, setDownLink] = useState<any>(null)
     const [statusMessage, setStatusMessage] = useState<string>('Fetching Video Information')
+
+    let thing = "Video"
+
+    if (start != '0' || end != '0') {
+      thing = "Clip"
+    }
+    
     const handleDownload = () => {
         
-      if (format == '') {
-        format = 'bestvideo'
-      }
         const body = JSON.stringify({
             id: id,
             format: format,
@@ -74,9 +78,9 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
             
 
     return (
-        <div className="flex justify-center">
-           <Button  size="xl" loading={downLink == 'pending'} onClick={() => handleDownload()} radius="lg" color="teal" leftIcon={<IconDownload size="1rem" />} className="bg-teal-500 mx-2">
-              Download Video
+        <div className="flex justify-center group ">
+           <Button size="xl" loading={downLink == 'pending'} onClick={() => handleDownload()} radius="lg" color="teal" leftIcon={<IconDownload size="25" />} className="bg-teal-500 mx-2">
+              Download {thing}
             </Button>
             <Status status={downLink} setval={setStatusMessage} statusMessage={statusMessage}/>
             <a id="invis" href={downLink}></a>
