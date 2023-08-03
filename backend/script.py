@@ -12,6 +12,8 @@ def download_video(id, format, start, end):
         print(" ".join(command))
 
     else:
+        if end == "0":
+            end = ""
         command = ["yt-dlp", "-f", f"{format}+bestaudio[ext=m4a]", "--merge-output-format", "mp4", "--download-sections", f"*{start}-{end}", f"youtube.com/watch?v={id}", "--force-keyframes-at-cuts", "-o", output_file]
         print(" ".join(command))
 
