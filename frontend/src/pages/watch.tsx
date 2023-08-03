@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from 'next/image';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import Link from "next/link";
 const inter = Inter({ subsets: ["latin"] });
 import Chapters from "../components/chapters";
 import ChapterList from "@/components/chapterList";
@@ -78,10 +79,15 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
   return (
     <main>
       <div className="flex justify-between px-8 py-10 mb-10 bg-back max-h-8 items-center"> 
+      <Link href='/'>
+
 			<div className="flex justify-between  items-center">
 				<Image src='/clipvid_logo.png' alt='logo' width={80} height={80}></Image>
 				<h1 className="items-center ml-2 text-teal-500 text-5xl font-semibold ">ClipVid</h1>
 			</div>
+      </Link>
+
+
 
 			<div className="flex justify-between items-center">
 				<button className=" text-black bg-teal-500 h-12 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
