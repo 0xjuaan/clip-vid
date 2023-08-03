@@ -16,6 +16,7 @@ function formatTime(seconds: number) {
 export default function Slider({duration, setRange} : {duration: number, setRange: Function}) {
     return (
         <RangeSlider
+            styles={{label: {opacity: 0.8}}}
             min={0}
             max={duration}
             minRange={5}
