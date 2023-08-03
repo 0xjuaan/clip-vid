@@ -50,7 +50,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   
 export default function VidInfo({videoData, id} : {videoData: any, id: string}) { //TODO: Later on, change any to a type for safety
 
-
   let duration = 600 as number;
   if (/^(\d{2}):(\d{2})$/.test(videoData.duration)) { //mm:ss format
     duration = moment.duration(`00:${videoData.duration}`).asSeconds();
@@ -61,20 +60,21 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
   else {
     duration = videoData.duration; //seconds already
   }
-  const [timeRange, setTimeRange] = useState([0, duration ]);
+
+  const [timeRange, setTimeRange] = useState([0, duration]);
   const router = useRouter();
   const [quality, setQuality] = useState([]);
-  const [format, setFormat] = useState(quality[quality.length-1]);
-
+  const [format, setFormat] = useState('');
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/quality?v=${id}`)
     .then((res) => res.json())
     .then((data) => {
       setQuality(data.response);
-      setFormat(data.response[data.response.length-1]);
+      setFormat(data.response[Math.floor(data.response.length/2)].id);
     })
   }, [id])
+
   return (
     <main>
       <div className="flex justify-between px-8 py-10 mb-10 bg-back max-h-8 items-center"> 
@@ -95,16 +95,14 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
       <div className='flex justify-between'>
           <div className="mx-5">
 
-            <VideoCard videoData={videoData} />
-            <Slider duration={duration} setRange={setTimeRange}/>
-            <DownloadButton id={id} format={format} start={formatTime(timeRange[0])} end={formatTime(timeRange[1])}/>
+            <div className="relative">
+              <VideoCard videoData={videoData} />
+              
+              <Slider duration={duration} setRange={setTimeRange}/>
+            </div>
+            <DownloadButton id={id} format={format} start={(timeRange[0] == 0) ? '0' : formatTime(timeRange[0])} end={(timeRange[1] == duration) ? '0' : formatTime(timeRange[1])}/>
 
-            {(videoData.chapters.length > 1)
-              && (
-                <div>
-                <ChapterList chapters={videoData.chapters} /> 
-                </div>
-              )}
+            
 
           </div>
           { (quality.length != 0 && quality) ? (

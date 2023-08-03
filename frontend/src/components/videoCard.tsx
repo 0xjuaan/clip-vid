@@ -20,14 +20,14 @@ export default function VideoCard({videoData} : {videoData: any}) {
 
 
   return (
-    <div className='rounded bg-teal-500 w-648 p-3'>
+    <div className='rounded bg-zinc-700 w-648 p-3'>
 
         <div className="flex justify-center relative">
             <Image className="" alt="thumbnail" src={videoData.thumbnail} width={640} height={360}/>
             <h1 className="absolute bottom-1 right-1 bg-black bg-opacity-60">{!secondsFormatted ? formattedDuration : secondsFormatted}</h1>
 
         </div>
-        <div className="text-black">
+        <div className="text-white">
             <h1 className="text-left font-bold ">{videoData.title}</h1>
             <h1 className="text-left text-xs font-semibold">{videoData.channel}</h1>
         </div>

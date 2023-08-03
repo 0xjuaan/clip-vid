@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Radio } from '@mantine/core';
 import DownloadButton from './download';  
 import Slider from './slider';
+import ChapterList from './chapterList';
 
 var moment = require("moment");
 var momentDurationFormatSetup = require("moment-duration-format");
@@ -23,25 +24,24 @@ function formatTime(seconds: number) {
 export default function Options({duration, setRange, range, quality, id, chapters, setFormat} : {duration: number, setRange: Function, range: number[], quality: any, id:string, chapters: chapter[], setFormat: Function}) {
   // Get duration in seconds
   const seconds = duration;
-  
   // Get unique values of 'p' from quality array
   let pValues = new Set(); 
   let removals = 0;  
 
     return (
         <div className="w-full text-teal-600">
-        <Tabs className='bg-teal-200' color="teal" defaultValue="first">
-          <Tabs.List className='' grow position="apart">
-            <Tabs.Tab  value="first">Select Snippet</Tabs.Tab>
+        <Tabs className='bg-teal-200 rounded-xl px-2' color="teal" defaultValue="first" variant="pills">
+
+          <Tabs.List className='rounded-xl font-semibold' grow position="apart">
+            <Tabs.Tab  value="first">Select Video Quality</Tabs.Tab>
             {(chapters.length > 1) && ( // If there are chapters, show this tab
             <Tabs.Tab  value="second">Select Chapter</Tabs.Tab>
             )}
           </Tabs.List>
 
-          <Tabs.Panel value="first" pb="xs">
+          <Tabs.Panel value="first" pb="xs" className="px-4">
             <Radio.Group
               name="quality"
-              label="Select Video Quality"
               onChange={(value) => {setFormat(value); console.log("WE HAVE" + value)}}
             >
             {
@@ -58,22 +58,35 @@ export default function Options({duration, setRange, range, quality, id, chapter
                 const p = q.res.split('x')[1];
                 const conditional = Number(index) == Number(quality.length-1-removals)
                 return (
-                  <Radio checked={conditional} className="mt-2" key={index} label={`${p}p`} value={String(q.id)} description={q.res}></Radio>
+                  <Radio styles={{label: {fontWeight: 500}, description: {fontWeight: 400}}} checked={conditional} className="mt-2" key={index} label={`${p}p`} value={String(q.id)} description={q.res}></Radio>
                 )
               })
             }
            </Radio.Group>
 
             
-           
-
             </Tabs.Panel>
 
-          {(chapters.length > 1) && ( // If there are chapters, show this tab
-        <Tabs.Panel value="second" pb="xs">
+          <Tabs.Panel value="second" pb="xs">
+                <ChapterList chapters={chapters} /> 
+          </Tabs.Panel>
+        </Tabs>
+        </div>
+        
+      );
+}
+
+/*
 
             <Select
-              label="Pick a Chapter to download"
+              className="mt-2 rounded-md"
+              styles={{
+                input: { backgroundColor: 'teal' },
+                dropdown: { backgroundColor: 'teal' }, 
+                root: { backgroundColor: 'teal' }, 
+                label: { fontWeight: 900 }, 
+                description: { fontWeight: 400 }
+              }}
               placeholder="Pick one"
               onChange={(value) => 
                 (Number(value) == chapters.length-1)
@@ -90,13 +103,5 @@ export default function Options({duration, setRange, range, quality, id, chapter
                 })
             }
             />
-            </Tabs.Panel>
-            )}
-
-            
-
-        </Tabs>
-        </div>
-        
-      );
-}
+          */
+         
