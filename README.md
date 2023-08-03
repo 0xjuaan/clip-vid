@@ -29,6 +29,6 @@ heroku container:release web worker -a clip-container
 
 
 ## Newer commands
-docker build -f Dockerfile.web -t juandocker1/clip-cluster:flask .
-docker build -f Dockerfile.worker -t juandocker1/clip-cluster:celery .
-kubectl rollout restart deployment/flask-deployment
+docker build -f Dockerfile.web -t juandocker1/clip-cluster:flask . 
+docker build -f Dockerfile.worker -t juandocker1/clip-cluster:celery . 
+kubectl rollout restart deployment/flask-deployment 
