@@ -7,8 +7,10 @@ def download_video(id, format, start, end):
     output_file = os.path.join(output_dir, "video.mp4")
 
     #Setting command (downloads required format + best audio, using timestamps if start+end provided)
-    if start == "None" or end == "None":
+    if start == "0" and end == "0":
         command = ["yt-dlp", "-f", f"{format}+bestaudio[ext=m4a]", f"youtube.com/watch?v={id}", "-o", output_file]
+        print(" ".join(command))
+
     else:
         command = ["yt-dlp", "-f", f"{format}+bestaudio[ext=m4a]", "--merge-output-format", "mp4", "--download-sections", f"*{start}-{end}", f"youtube.com/watch?v={id}", "--force-keyframes-at-cuts", "-o", output_file]
         print(" ".join(command))
