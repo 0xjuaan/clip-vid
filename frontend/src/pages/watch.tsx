@@ -1,18 +1,17 @@
-import { Inter } from "next/font/google";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from 'next/image';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Link from "next/link";
-const inter = Inter({ subsets: ["latin"] });
-import Chapters from "../components/chapters";
-import ChapterList from "@/components/chapterList";
 import VideoCard from "@/components/videoCard";
 import Options from "@/components/options";
 import Slider from '@/components/slider';
 import DownloadButton from "@/components/download";
 var moment = require("moment");
 var momentDurationFormatSetup = require("moment-duration-format");
+import { IconBrandTwitterFilled } from '@tabler/icons-react';
+
+
 import {formatTime} from "@/utils/formatTime";
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
     const vid = context.query.v as string;
@@ -85,11 +84,14 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
 				<Image src='/clipvid_logo.png' alt='logo' width={80} height={80}></Image>
 				<h1 className="items-center ml-2 text-teal-500 text-5xl font-semibold ">ClipVid</h1>
 			</div>
+      
       </Link>
 
 
-
 			<div className="flex justify-between items-center">
+        <Link href="https://twitter.com/truechosenjuan">
+          <IconBrandTwitterFilled size={40} color="#000" className="text-teal-500 mx-6"/>
+        </Link>
 				<button className=" text-black bg-teal-500 h-12 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
 					Give Feedback
 				</button>

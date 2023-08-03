@@ -43,7 +43,7 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
     if (start != '0' || end != '0') {
       thing = "Clip"
     }
-    
+
     const handleDownload = () => {
         
         const body = JSON.stringify({

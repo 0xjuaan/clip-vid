@@ -30,7 +30,7 @@ export default function Options({duration, setRange, range, quality, id, chapter
 
     return (
         <div className="w-full text-teal-600">
-        <Tabs className='bg-teal-200 rounded-xl px-2' color="teal" defaultValue="first" variant="pills">
+        <Tabs className='bg-teal-200 rounded-xl' color="teal" defaultValue="first" variant="pills">
 
           <Tabs.List className='rounded-xl font-semibold' grow position="apart">
             <Tabs.Tab  value="first">Select Video Quality</Tabs.Tab>
