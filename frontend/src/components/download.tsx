@@ -76,13 +76,13 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
         }
         }, [downLink])
             
-
+    //  <Status status={downLink} setval={setStatusMessage} statusMessage={statusMessage}/>
+    
     return (
         <div className="flex justify-center group ">
            <Button size="xl" loading={downLink == 'pending'} onClick={() => handleDownload()} radius="lg" color="teal" leftIcon={<IconDownload size="25" />} className="bg-teal-500 mx-2">
               Download {thing}
             </Button>
-            <Status status={downLink} setval={setStatusMessage} statusMessage={statusMessage}/>
             <a id="invis" href={downLink}></a>
         </div>
     )

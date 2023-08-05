@@ -1,10 +1,26 @@
 import { useState } from "react";
 import {useRouter} from "next/router";
 import  Image  from "next/image";
+import { useDisclosure } from '@mantine/hooks';
+import { Modal, TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
+import { useForm } from '@mantine/form';
 
 export default function Home() {
   const router = useRouter();
   const [vid, setVid] = useState("");
+  const [opened, { open, close }] = useDisclosure(false);
+  
+  const form = useForm({
+    initialValues: {
+      email: '',
+	  message: '',
+    },
+
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+    },
+  });
+
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -23,9 +39,47 @@ export default function Home() {
         }
       });
   };
+  async function submit(values: any) {
+
+	fetch(`/api/feedback`, {
+		method: 'POST',
+		headers: {'Content-Type': 'application/json'},
+		body: JSON.stringify(values)
+	})
+	.then((res) => {
+		if (!res.ok) alert("Error submitting feedback")
+		else return res.json()
+	})
+	.then((data) => {
+		if (data === null) return
+		alert("Feedback submitted!")
+	});
+  }
 
   return (
     <main>
+		<Modal opened={opened} onClose={close} title="Please tell us about your experience" centered>
+		<Box maw={300} mx="auto">
+      <form onSubmit={form.onSubmit((values) => {close(); submit(values);} )}>
+        <TextInput
+          label="Email"
+          placeholder="your@email.com"
+          {...form.getInputProps('email')}
+        />
+
+		<TextInput
+          withAsterisk
+          label="Your message"
+          placeholder="I love this app!"
+          {...form.getInputProps('message')}
+        />
+
+        <Group position="center" mt="md">
+          <Button className="bg-teal-500 text-white hover:bg-teal-800" type="submit">Submit</Button>
+        </Group>
+      </form>
+    </Box>
+      </Modal>
 		{/* Header */}
 		<div className="flex justify-between px-8 py-10 bg-back max-h-8 items-center"> 
 			<div className="flex justify-between  items-center">
@@ -33,10 +87,11 @@ export default function Home() {
 				<h1 className="items-center ml-2 text-teal-500 text-5xl font-semibold ">ClipVid</h1>
 			</div>
 
-			<div className="flex justify-between items-center">
-				<button className=" text-black bg-teal-500 h-12 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
+			<div className="flex justify-between items-center text-black">
+				<button onClick={open} className=" text-black bg-teal-500 h-12 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
 					Give Feedback
 				</button>
+				
 
 			</div>
     		

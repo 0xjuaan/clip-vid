@@ -26,6 +26,8 @@ export default function handler(
   )
     .then((response) => response.json())
     .then((data) => {
+      console.log(process.env.YOUTUBE_API_KEY + videoId)
+      console.log("\n\n\n" + JSON.stringify(data) + "\n\n\n")
       if (data.pageInfo.totalResults === 0) {
           return res.status(404).json({ response: "Video Not Found", id: videoId });
       }

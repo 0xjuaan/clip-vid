@@ -20,7 +20,7 @@ export default function VideoCard({videoData} : {videoData: any}) {
 
 
   return (
-    <div className='rounded bg-zinc-700 w-648 p-3'>
+    <div className='rounded bg-back w-648 p-3'>
 
         <div className="flex justify-center relative">
             <Image className="" alt="thumbnail" src={videoData.thumbnail} width={640} height={360}/>

@@ -12,6 +12,7 @@
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
     "@mantine/core": "^6.0.16",
+    "@mantine/form": "^6.0.17",
     "@tabler/icons-react": "^2.26.0",
     "@types/node": "20.4.2",
     "@types/react": "18.2.14",
