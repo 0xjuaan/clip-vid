@@ -45,13 +45,13 @@ export default async function handler(
         const data = await response.json();
 
         const statusURL = ip + data.Location
-        const url = await pollStatus(statusURL);
+        // const url = await pollStatus(statusURL);
 
-        if (!url || url === null || url === undefined) {
-            return res.status(500).json({ error: 'Failed to download file' });
-        }
+        // if (!url || url === null || url === undefined) {
+            // return res.status(500).json({ error: 'Failed to download file' });
+        // }
 
-        return res.status(200).json({ url: url });
+        return res.status(200).json({ url: statusURL });
 }  
 
 

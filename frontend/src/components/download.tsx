@@ -34,6 +34,37 @@ function Status({status, statusMessage, setval} : {status: string, statusMessage
     }
 }
 
+async function pollStatus(statusURL :string) {
+  let response, data;
+
+  do {
+    // You may want to add a delay here to not overwhelm your server
+    await new Promise(r => setTimeout(r, 2000));
+
+    response = await fetch('/api/poll', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({statusURL}),
+    });
+    
+    data = await response.json();
+
+    if (data.state === 'FAILED') {
+      return null;
+    }
+
+  } while(data.state !== 'SUCCESS' && response.ok);
+
+  if(response.ok) {
+    // The task is done, handle the presigned URL
+    return data.url;
+  } 
+  else {
+    // Handle the error
+    console.error(data);
+  }
+}
+
 export default function DownloadButton({id, format, start, end} : {id: string, format: string, start: string, end: string}) {
     const [downLink, setDownLink] = useState<any>(null)
     const [statusMessage, setStatusMessage] = useState<string>('Fetching Video Information')
@@ -52,7 +83,6 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
             start: start,
             end: end,
           })
-          console.log(body)
 
         setDownLink('pending')
         fetch('http://localhost:3000/api/download', {
@@ -65,8 +95,12 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
           else return res.json()
         })
         .then((data) => {
-          setDownLink(data.url)
-        })
+          const statusURL = data.url;
+          pollStatus(statusURL)
+          .then((data) => {
+            setDownLink(data)
+        }
+        )})
       }
 
       useEffect(() => {
