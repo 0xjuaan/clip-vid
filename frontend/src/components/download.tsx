@@ -98,6 +98,7 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
           const statusURL = data.url;
           pollStatus(statusURL)
           .then((data) => {
+            console.log(data)
             setDownLink(data)
         }
         )})
