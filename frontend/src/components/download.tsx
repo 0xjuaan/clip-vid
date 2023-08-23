@@ -53,7 +53,7 @@ async function pollStatus(statusURL :string) {
       return null;
     }
 
-  } while(data.state !== 'SUCCESS' && response.ok && data.status != 'Pending...');
+  } while(data.state !== 'SUCCESS' && response.ok && data.status == 'Pending...');
 
   if(response.ok) {
     // The task is done, handle the presigned URL
