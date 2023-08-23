@@ -5,6 +5,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { Modal, TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import Head	from 'next/head';
+import { IconBrandTwitterFilled } from '@tabler/icons-react';
+import Link from 'next/link';
 
 export default function Home() {
   const router = useRouter();
@@ -67,7 +69,7 @@ export default function Home() {
 
     <main>
 		
-		<Modal opened={opened} onClose={close} title="Please tell us about your experience" centered>
+		<Modal className="text-red" opened={opened} onClose={close} title="Please tell us about your experience" centered>
 		<Box maw={300} mx="auto">
       <form onSubmit={form.onSubmit((values) => {close(); submit(values);} )}>
         <TextInput
@@ -84,7 +86,7 @@ export default function Home() {
         />
 
         <Group position="center" mt="md">
-          <Button className="bg-teal-500 text-white hover:bg-teal-800" type="submit">Submit</Button>
+          <Button className="bg-teal-500 text-white hover:bg-teal-600 transition duration-150 ease-in-out" type="submit">Submit</Button>
         </Group>
       </form>
     </Box>
@@ -97,9 +99,13 @@ export default function Home() {
 			</div>
 
 			<div className="flex justify-between items-center text-black">
+			<Link target='_blank' href="https://twitter.com/truechosenjuan">
+          <IconBrandTwitterFilled size={40} color="#000" className="text-teal-500 mx-6"/>
+        </Link>
 				<button onClick={open} className=" text-black bg-teal-500 h-12 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
 					Give Feedback
 				</button>
+
 				
 
 			</div>

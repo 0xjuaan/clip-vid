@@ -117,8 +117,8 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
     </Head>
 
     <main>
-      <Modal className="text-white" styles={{content: {backgroundColor: '#0D2430'}, header: {backgroundColor: '#0D2430', color: '#fff'}}} opened={opened} onClose={close} title="Please tell us about your experience" centered>
-		<Box  className="text-white" maw={300} mx="auto">
+      <Modal opened={opened} onClose={close} title="Please tell us about your experience" centered>
+		<Box maw={300} mx="auto">
       <form onSubmit={form.onSubmit((values) => {close(); submit(values);} )}>
         <TextInput
           label="Email"
@@ -134,7 +134,7 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
         />
 
         <Group position="center" mt="md">
-          <Button className="bg-teal-500 text-white hover:bg-teal-800" type="submit">Submit</Button>
+          <Button className="bg-teal-500 text-white hover:bg-teal-600 transition duration-150 ease-in-out" type="submit">Submit</Button>
         </Group>
       </form>
     </Box>
@@ -151,7 +151,7 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
 
 
 			<div className="flex justify-between items-center">
-        <Link href="https://twitter.com/truechosenjuan">
+        <Link target='_blank' href="https://twitter.com/truechosenjuan">
           <IconBrandTwitterFilled size={40} color="#000" className="text-teal-500 mx-6"/>
         </Link>
 				<button onClick={open} className=" text-black bg-teal-500 h-12 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
