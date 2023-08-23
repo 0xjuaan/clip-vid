@@ -10,6 +10,9 @@ import DownloadButton from "@/components/download";
 var moment = require("moment");
 var momentDurationFormatSetup = require("moment-duration-format");
 import { IconBrandTwitterFilled } from '@tabler/icons-react';
+import { useDisclosure } from '@mantine/hooks';
+import { Modal, TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
+import { useForm } from '@mantine/form';
 
 
 import {formatTime} from "@/utils/formatTime";
@@ -49,6 +52,18 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   };
   
 export default function VidInfo({videoData, id} : {videoData: any, id: string}) { //TODO: Later on, change any to a type for safety
+  const [opened, { open, close }] = useDisclosure(false);
+  
+  const form = useForm({
+    initialValues: {
+      email: '',
+	  message: '',
+    },
+
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+    },
+  });
 
   let duration = 600 as number;
   if (/^(\d{2}):(\d{2})$/.test(videoData.duration)) { //mm:ss format
@@ -75,8 +90,47 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
     })
   }, [id])
 
+  async function submit(values: any) {
+
+    fetch(`/api/feedback`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(values)
+    })
+    .then((res) => {
+      if (!res.ok) alert("Error submitting feedback")
+      else return res.json()
+    })
+    .then((data) => {
+      if (data === null) return
+      alert("Feedback submitted!")
+    });
+    }
+
   return (
     <main>
+      <Modal className="text-white" styles={{content: {backgroundColor: '#0D2430'}, header: {backgroundColor: '#0D2430', color: '#fff'}}} opened={opened} onClose={close} title="Please tell us about your experience" centered>
+		<Box  className="text-white" maw={300} mx="auto">
+      <form onSubmit={form.onSubmit((values) => {close(); submit(values);} )}>
+        <TextInput
+          label="Email"
+          placeholder="your@email.com"
+          {...form.getInputProps('email')}
+        />
+
+		<TextInput
+          withAsterisk
+          label="Your message"
+          placeholder="I love this app!"
+          {...form.getInputProps('message')}
+        />
+
+        <Group position="center" mt="md">
+          <Button className="bg-teal-500 text-white hover:bg-teal-800" type="submit">Submit</Button>
+        </Group>
+      </form>
+    </Box>
+      </Modal>
       <div className="flex justify-between px-8 py-10 mb-10 bg-back max-h-8 items-center"> 
       <Link href='/'>
 
@@ -92,7 +146,7 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
         <Link href="https://twitter.com/truechosenjuan">
           <IconBrandTwitterFilled size={40} color="#000" className="text-teal-500 mx-6"/>
         </Link>
-				<button className=" text-black bg-teal-500 h-12 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
+				<button onClick={open} className=" text-black bg-teal-500 h-12 hover:bg-teal-700 font-bold py-2 px-4 rounded-full transition duration-150 ease-in-out">
 					Give Feedback
 				</button>
 
