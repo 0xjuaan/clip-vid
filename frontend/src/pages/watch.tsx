@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
         },
       };
     }
-    const res = await fetch(`http://localhost:3000/api/getInfo?v=${vid}`);
+    const res = await fetch(`https://clipvid.tech/api/getInfo?v=${vid}`);
     const data = await res.json();
 
     if (data.response === "Video not found") 
@@ -82,7 +82,7 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
   const [format, setFormat] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/quality?v=${id}`)
+    fetch(`/api/quality?v=${id}`)
     .then((res) => res.json())
     .then((data) => {
       setQuality(data.response);
