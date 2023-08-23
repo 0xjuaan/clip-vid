@@ -14,6 +14,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { Modal, TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
+import Head	from 'next/head';
 
 import {formatTime} from "@/utils/formatTime";
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
@@ -108,6 +109,13 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
     }
 
   return (
+    <>
+    <Head>
+        <title>ClipVid</title>
+        <meta name="description" content="Free YouTube video clipper" />
+        <link rel="icon" href="/clipvid_logo.png" />
+    </Head>
+
     <main>
       <Modal className="text-white" styles={{content: {backgroundColor: '#0D2430'}, header: {backgroundColor: '#0D2430', color: '#fff'}}} opened={opened} onClose={close} title="Please tell us about your experience" centered>
 		<Box  className="text-white" maw={300} mx="auto">
@@ -179,5 +187,6 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
         
       
     </main>
+    </>
   );
 }

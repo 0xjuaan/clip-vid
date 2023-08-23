@@ -4,6 +4,7 @@ import  Image  from "next/image";
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import Head	from 'next/head';
 
 export default function Home() {
   const router = useRouter();
@@ -57,7 +58,15 @@ export default function Home() {
   }
 
   return (
+	<>
+	<Head>
+        <title>ClipVid</title>
+        <meta name="description" content="Free YouTube video clipper" />
+        <link rel="icon" href="/clipvid_logo.png" />
+    </Head>
+
     <main>
+		
 		<Modal opened={opened} onClose={close} title="Please tell us about your experience" centered>
 		<Box maw={300} mx="auto">
       <form onSubmit={form.onSubmit((values) => {close(); submit(values);} )}>
@@ -124,5 +133,6 @@ export default function Home() {
 			
       </div>
     </main>
+	</>
   );
 }
