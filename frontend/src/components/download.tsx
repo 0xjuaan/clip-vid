@@ -85,7 +85,7 @@ export default function DownloadButton({id, format, start, end} : {id: string, f
           })
 
         setDownLink('pending')
-        fetch('http://localhost:3000/api/download', {
+        fetch('/api/download', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: body
