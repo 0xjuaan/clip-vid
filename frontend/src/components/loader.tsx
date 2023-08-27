@@ -4,7 +4,7 @@ import { Radio } from '@mantine/core';
 import DownloadButton from './download';  
 import Slider from './slider';
 import ChapterList from './chapterList';
-
+import { BarWave } from "react-cssfx-loading";
 var moment = require("moment");
 var momentDurationFormatSetup = require("moment-duration-format");
 
@@ -13,20 +13,7 @@ export interface chapter {
     time: string;
 }
 
-function formatTime(seconds: number) {
-    if (seconds < 60) {
-        return (seconds < 10) ? `00:0${seconds}`:`00:${seconds}`
-    }
-    else {
-        return moment.duration(seconds, 'seconds').format('hh:mm:ss')
-    }
-}
-export default function Loader({duration, setRange, range, quality, id, chapters, setFormat} : {duration: number, setRange: Function, range: number[], quality: any, id:string, chapters: chapter[], setFormat: Function}) {
-  // Get duration in seconds
-  const seconds = duration;
-  // Get unique values of 'p' from quality array
-  let pValues = new Set(); 
-  let removals = 0;  
+export default function Loader({chapters} : {chapters: chapter[]}) {
 
     return (
         <div className="w-full text-teal-600">
@@ -40,7 +27,10 @@ export default function Loader({duration, setRange, range, quality, id, chapters
           </Tabs.List>
 
           <Tabs.Panel value="first" pb="xs" className="px-4">
-            <h1>Loading video quality options</h1>
+            <div className=" flex flex-col items-center justify-center">
+                <h1 className='text-black font-semibold mb-5'>Loading video quality options</h1>
+                <BarWave color="#22c7b7" />
+            </div>
             </Tabs.Panel>
 
           <Tabs.Panel value="second" pb="xs">

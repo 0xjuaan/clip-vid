@@ -181,7 +181,7 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
           </div>)
           : (
           <div className="mx-5 w-2/5">
-            <Loader duration={duration} setRange={setTimeRange} setFormat={setFormat} range={timeRange} quality={quality} id={id} chapters={videoData.chapters}/>
+            <Loader chapters={videoData.chapters}/>
           </div>
           )
           }
