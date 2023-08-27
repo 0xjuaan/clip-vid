@@ -13,7 +13,7 @@ import { IconBrandTwitterFilled } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
-
+import Loader from "@/components/loader";
 import Head	from 'next/head';
 
 import {formatTime} from "@/utils/formatTime";
@@ -179,7 +179,11 @@ export default function VidInfo({videoData, id} : {videoData: any, id: string}) 
           <div className="mx-5 w-2/5">
             <Options duration={duration} setRange={setTimeRange} setFormat={setFormat} range={timeRange} quality={quality} id={id} chapters={videoData.chapters}/>
           </div>)
-          : (<div></div>)
+          : (
+          <div className="mx-5 w-2/5">
+            <Loader duration={duration} setRange={setTimeRange} setFormat={setFormat} range={timeRange} quality={quality} id={id} chapters={videoData.chapters}/>
+          </div>
+          )
           }
       </div>
 
