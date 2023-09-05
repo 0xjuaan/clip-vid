@@ -1,7 +1,7 @@
 # ClipVid
 The first youtube to mp4 service that lets you download snippets of youtube videos. 
 
-[clipvid.tech](clipvid.tech)
+[clipvid.tech](https://clipvid.tech)
 
 ## Tech Stack
 **Frontend:**  
